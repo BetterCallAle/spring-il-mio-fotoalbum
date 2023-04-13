@@ -10,6 +10,13 @@
 </head>
 <body>
 <header th:insert="~{fragments/header :: header('photos')}"></header>
+
+<!--ALERT-->
+<th:block th:if="${success}">
+    <div th:replace="~{fragments/alert :: alert(${success})}"></div>
+</th:block>
+<!--/ALERT-->
+
 <div class="container py-4">
     <h1 class="text-center mb-3">
         Tutte le foto
@@ -36,6 +43,11 @@
             <td>
                 <a th:href="@{|/photos/*{id}|}" class="btn btn-danger"><i class="fa-solid fa-eye"></i></a>
                 <a th:href="@{|/photos/edit/*{id}|}" class="btn btn-danger"><i class="fa-solid fa-pencil"></i></a>
+                <form method="POST" th:action="@{|photos/delete/*{id}|}" class="d-inline">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </form>
             </td>
         </tr>
         </tbody>

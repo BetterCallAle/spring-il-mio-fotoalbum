@@ -50,4 +50,10 @@ public class PhotoService {
         updatePhoto.setCategories(photo.getCategories());
         return photoRepo.save(updatePhoto);
     }
+
+    //Delete a photo
+    public void deletePhoto(Integer id) throws PhotoNotFoundException {
+        Photo photo = findPhoto(id);
+        photoRepo.delete(photo);
+    }
 }
