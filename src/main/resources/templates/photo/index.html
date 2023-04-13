@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <div th:replace="~{fragments/resources :: resources('Homepage')}"></div>
+</head>
+<body>
+<header th:insert="~{fragments/header :: header('photos')}"></header>
+<div class="container py-4">
+    <h1 class="text-center mb-3">Tutte le foto</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Titolo</th>
+            <th scope="col">Visibile</th>
+            <th scope="col">Immagine</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="photo : ${photos}" th:object="${photo}">
+            <th scope="row" th:text="*{title}"></th>
+            <td th:text="*{visible} == true ? 'Si' : 'No'"></td>
+            <td>
+                <img th:src="@{*{imgUrl}}" class="table-img">
+            </td>
+            <td>
+                <a th:href="@{|/photos/*{id}|}" class="btn btn-danger"><i class="fa-solid fa-eye"></i></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

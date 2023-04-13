@@ -1,0 +1,24 @@
+.error-body{
+    background-color: #473d7b;
+}
+
+img{
+    max-width: 100%;
+}
+
+.my-navbar-item{
+    background-color: white;
+    padding: 3rem, 3rem !important;
+    border: 1px solid white;
+    border-radius: 20px;
+    color: black;
+}
+
+.my-active{
+    color:red;
+}
+
+.table-img{
+    max-width: 100%;
+    width: 20px;
+}
