@@ -9,7 +9,8 @@
     <div th:replace="~{fragments/resources :: resources('Aggiungi una nuova foto')}"></div>
 </head>
 <body>
-<header th:insert="~{fragments/header :: header('edit-photo')}"></header>
+<header th:insert="~{fragments/header :: header('editPhoto')}"></header>
+
 <div class="container py-4">
     <h1 class="text-danger text-center">Aggiungi una nuova foto</h1>
 
@@ -40,7 +41,7 @@
                 <input type="checkbox" class="form-check mb-1" th:id="|category-${category.id}|"
                        th:field="*{categories}"
                        th:value="${category.id}">
-                <label th:id="|category-${category.id}|" class="form-label ms-2" th:text="${category.name}"></label>
+                <label th:for="|category-${category.id}|" class="form-label ms-2" th:text="${category.name}"></label>
             </div>
         </div>
 
