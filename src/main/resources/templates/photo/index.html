@@ -32,7 +32,7 @@
     </form>
     <!--/SEARCHBAR-->
 
-    <table class="table mx-auto mt-3 w-75">
+    <table class="table mx-auto mt-3 w-75" th:if="${photos.size} > 0">
         <thead>
         <tr>
             <th scope="col">Titolo</th>
@@ -60,6 +60,8 @@
         </tr>
         </tbody>
     </table>
+
+    <h6 class="mt-4 text-danger text-center" th:unless="${photos.size} > 0">Non sono state trovate foto</h6>
 </div>
 </body>
 </html>
