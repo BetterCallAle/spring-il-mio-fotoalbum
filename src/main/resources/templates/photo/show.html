@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -9,9 +10,24 @@
 </head>
 <body>
 <header th:insert="~{fragments/header :: header('photo')}"></header>
-<div class="container text-center py-4" th:object="${photo}">
-    <h1 class="text-danger" th:text="*{title}"></h1>
-    <img th:src="@{*{imgUrl}}">
+<div class="container py-4" th:object="${photo}">
+    <div class="actions mb-3">
+        <a th:href="@{/photos}" class="btn btn-danger"><i class="fa-solid fa-arrow-left"></i></a>
+    </div>
+
+    <div class="text-center page-body">
+        <ul class="tag">
+            <li class="d-inline-block me-2" th:each="category : *{categories}" th:text="'#' + ${category.name}"></li>
+        </ul>
+        <h1 class="text-danger" th:text="*{title}"></h1>
+        <img th:src="@{*{imgUrl}}">
+        <p th:text="*{description}"></p>
+        <p>Visibile:
+            <i class="fa-solid fa-check btn btn-success" th:if="*{isVisible} == true"></i>
+            <i class="fa-solid fa-x btn btn-danger" th:if="*{isVisible} == false"></i>
+        </p>
+    </div>
+
 </div>
 </body>
 </html>

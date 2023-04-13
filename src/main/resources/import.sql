@@ -5,3 +5,6 @@ INSERT INTO categories (name) VALUES('City');
 INSERT INTO category_photo (photo_id, category_id) VALUES(1, 2);
 INSERT INTO category_photo (photo_id, category_id) VALUES(2, 1);
 INSERT INTO category_photo (photo_id, category_id) VALUES(2, 2);
+INSERT INTO users (name, surname, email, password) VALUES ('Pippo', 'Franco', 'pippofranco@gmail.com', '{noop}password');
+INSERT INTO roles (name) VALUES ('ADMIN');
+INSERT INTO user_role(user_id, role_id) VALUE (1, 1);

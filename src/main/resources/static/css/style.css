@@ -20,5 +20,17 @@ img{
 
 .table-img{
     max-width: 100%;
-    width: 20px;
+    width: 100px;
+}
+
+.tag{
+    list-style-type: none;
+}
+
+.tag li{
+    background-color: #ff4c4c;
+    font-size: .9rem;
+    padding: .4rem;
+    color: white;
+    border-radius: 20px;
 }
