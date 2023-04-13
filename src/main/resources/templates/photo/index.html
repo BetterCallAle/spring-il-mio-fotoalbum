@@ -11,7 +11,12 @@
 <body>
 <header th:insert="~{fragments/header :: header('photos')}"></header>
 <div class="container py-4">
-    <h1 class="text-center mb-3">Tutte le foto</h1>
+    <h1 class="text-center mb-3">
+        Tutte le foto
+        <a th:href="@{/photos/create}" class="btn btn-danger">
+            <i class="fa-solid fa-plus"></i>
+        </a>
+    </h1>
 
     <table class="table">
         <thead>
@@ -30,6 +35,7 @@
             </td>
             <td>
                 <a th:href="@{|/photos/*{id}|}" class="btn btn-danger"><i class="fa-solid fa-eye"></i></a>
+                <a th:href="@{|/photos/edit/*{id}|}" class="btn btn-danger"><i class="fa-solid fa-pencil"></i></a>
             </td>
         </tr>
         </tbody>

@@ -28,4 +28,26 @@ public class PhotoService {
             throw new PhotoNotFoundException("Can't find photo with " + id + " id");
         }
     }
+
+    //Create a new photo
+    public Photo createPhoto(Photo photo) {
+        Photo newPhoto = new Photo();
+        newPhoto.setTitle(photo.getTitle());
+        newPhoto.setImgUrl(photo.getImgUrl());
+        newPhoto.setVisible(photo.getVisible());
+        newPhoto.setDescription(photo.getDescription());
+        newPhoto.setCategories(photo.getCategories());
+        return photoRepo.save(newPhoto);
+    }
+
+    //Update an existing photo
+    public Photo updatePhoto(Photo photo, Integer id) throws PhotoNotFoundException {
+        Photo updatePhoto = findPhoto(id);
+        updatePhoto.setTitle(photo.getTitle());
+        updatePhoto.setImgUrl(photo.getImgUrl());
+        updatePhoto.setVisible(photo.getVisible());
+        updatePhoto.setDescription(photo.getDescription());
+        updatePhoto.setCategories(photo.getCategories());
+        return photoRepo.save(updatePhoto);
+    }
 }

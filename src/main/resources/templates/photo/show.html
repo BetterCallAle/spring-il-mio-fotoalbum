@@ -9,7 +9,7 @@
     <div th:replace="~{fragments/resources :: resources(${photo.title})}"></div>
 </head>
 <body>
-<header th:insert="~{fragments/header :: header('photo')}"></header>
+<header th:insert="~{fragments/header :: header('create-photo')}"></header>
 <div class="container py-4" th:object="${photo}">
     <div class="actions mb-3">
         <a th:href="@{/photos}" class="btn btn-danger"><i class="fa-solid fa-arrow-left"></i></a>
@@ -23,8 +23,8 @@
         <img th:src="@{*{imgUrl}}">
         <p th:text="*{description}"></p>
         <p>Visibile:
-            <i class="fa-solid fa-check btn btn-success" th:if="*{isVisible} == true"></i>
-            <i class="fa-solid fa-x btn btn-danger" th:if="*{isVisible} == false"></i>
+            <i class="fa-solid fa-check btn btn-success" th:if="*{visible} == true"></i>
+            <i class="fa-solid fa-x btn btn-danger" th:if="*{visible} == false"></i>
         </p>
     </div>
 

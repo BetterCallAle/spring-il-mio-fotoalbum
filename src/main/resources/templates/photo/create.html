@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <div th:replace="~{fragments/resources :: resources('Aggiungi una nuova foto')}"></div>
+</head>
+<body>
+<header th:insert="~{fragments/header :: header('add-photo')}"></header>
+<div class="container py-4">
+    <h1 class="text-danger text-center">Aggiungi una nuova foto</h1>
+
+    <form th:action="@{/photos/create}" method="POST" th:object="${photo}">
+        <div class="mb-3">
+            <label for="title" class="form-label">Titolo</label>
+            <input type="text" class="form-control" id="title" th:field="*{title}" th:errorClass="is-invalid">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('title')}">
+                <ul>
+                    <li th:each="err : ${#fields.errors('title')}" th:text="${err}"></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="title" class="form-label">Url</label>
+            <input type="text" class="form-control" id="imgUrl" th:field="*{imgUrl}" th:errorClass="is-invalid">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('imgUrl')}">
+                <ul>
+                    <li th:each="err : ${#fields.errors('imgUrl')}" th:text="${err}"></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <p>Categorie:</p>
+            <div class="mb-1 d-flex" th:each="category : ${categories}">
+                <input type="checkbox" class="form-check mb-1" th:id="|category-${category.id}|"
+                       th:field="*{categories}"
+                       th:value="${category.id}">
+                <label th:id="|category-${category.id}|" class="form-label ms-2" th:text="${category.name}"></label>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Descrizione</label>
+            <textarea class="form-control" th:field="*{description}" id="description"></textarea>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('description')}">
+                <ul>
+                    <li th:each="err : ${#fields.errors('description')}" th:text="${err}"></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="mb-3 d-flex">
+            <input type="checkbox" class="form-check mb-1" id="visible" th:field="*{visible}">
+            <label for="visible" class="form-label ms-2">Rendi visibile da subito</label>
+        </div>
+
+        <button type="submit" class="btn btn-danger">Submit</button>
+        <button type="reset" class="btn btn-secondary">Resetta i campi</button>
+    </form>
+</div>
+</body>
+</html>

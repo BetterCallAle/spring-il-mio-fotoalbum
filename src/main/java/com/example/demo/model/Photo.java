@@ -14,17 +14,16 @@ public class Photo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotBlank
+    @NotBlank(message = "Il titolo è obbligatorio")
     @Column(nullable = false)
     private String title;
 
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @NotNull
-    private boolean isVisible;
+    private boolean visible;
 
-    @NotBlank
+    @NotBlank(message = "URL obbligatorio")
     @Column(columnDefinition = "TEXT", nullable = false)
     private String imgUrl;
 
@@ -49,8 +48,8 @@ public class Photo {
         return description;
     }
 
-    public boolean isVisible() {
-        return isVisible;
+    public boolean getVisible() {
+        return visible;
     }
 
     public String getImgUrl() {
@@ -75,7 +74,7 @@ public class Photo {
     }
 
     public void setVisible(boolean visible) {
-        isVisible = visible;
+        this.visible = visible;
     }
 
     public void setImgUrl(String imgUrl) {
@@ -94,7 +93,7 @@ public class Photo {
 
         Photo photo = (Photo) o;
 
-        if (isVisible() != photo.isVisible()) return false;
+        if (getVisible() != photo.getVisible()) return false;
         if (getId() != null ? !getId().equals(photo.getId()) : photo.getId() != null) return false;
         if (getTitle() != null ? !getTitle().equals(photo.getTitle()) : photo.getTitle() != null) return false;
         if (getDescription() != null ? !getDescription().equals(photo.getDescription()) : photo.getDescription() != null)
@@ -108,7 +107,7 @@ public class Photo {
         int result = getId() != null ? getId().hashCode() : 0;
         result = 31 * result + (getTitle() != null ? getTitle().hashCode() : 0);
         result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
-        result = 31 * result + (isVisible() ? 1 : 0);
+        result = 31 * result + (getVisible() ? 1 : 0);
         result = 31 * result + (getImgUrl() != null ? getImgUrl().hashCode() : 0);
         result = 31 * result + (getCategories() != null ? getCategories().hashCode() : 0);
         return result;
