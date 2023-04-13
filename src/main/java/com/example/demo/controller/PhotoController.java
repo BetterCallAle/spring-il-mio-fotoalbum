@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/photos")
@@ -27,8 +29,13 @@ public class PhotoController {
 
     //INDEX
     @GetMapping
-    public String index(Model model) {
-        List<Photo> photos = photoService.getAllPhotos();
+    public String index(@RequestParam(name = "s") Optional<String> s, Model model) {
+        List<Photo> photos;
+        if (s.isEmpty()) {
+            photos = photoService.getAllPhotos();
+        } else {
+            photos = photoService.findPhotoByName(s.get());
+        }
         model.addAttribute("photos", photos);
         return "photo/index";
     }

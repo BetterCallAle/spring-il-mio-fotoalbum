@@ -19,7 +19,7 @@ public class PhotoService {
         return photoRepo.findAll();
     }
 
-    //Find one photo searching by ID
+    //Find a photo searching by ID
     public Photo findPhoto(Integer id) throws PhotoNotFoundException {
         Optional<Photo> photo = photoRepo.findById(id);
         if (photo.isPresent()) {
@@ -27,6 +27,11 @@ public class PhotoService {
         } else {
             throw new PhotoNotFoundException("Can't find photo with " + id + " id");
         }
+    }
+
+    //Find a photo searching by name
+    public List<Photo> findPhotoByName(String name) {
+        return photoRepo.findByTitleContainingIgnoreCase(name);
     }
 
     //Create a new photo

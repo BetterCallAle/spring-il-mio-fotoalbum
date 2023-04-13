@@ -25,12 +25,20 @@
         </a>
     </h1>
 
-    <table class="table">
+    <!--SEARCHBAR-->
+    <form method="GET" th:action="@{/photos}" class="d-flex ms-2" role="search">
+        <input class="form-control me-1" type="search" placeholder="Cerca una foto" aria-label="Search" name="s">
+        <button class="btn btn-outline-danger" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </form>
+    <!--/SEARCHBAR-->
+
+    <table class="table mx-auto mt-3 w-75">
         <thead>
         <tr>
             <th scope="col">Titolo</th>
             <th scope="col">Visibile</th>
             <th scope="col">Immagine</th>
+            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
