@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <div th:replace="~{fragments/resources :: resources('Homepage')}"></div>
+</head>
+<body>
+<header th:insert="~{fragments/header :: header('categories')}"></header>
+<div class="container py-4">
+    <h1 class="mb-3 text-danger text-center">Categorie</h1>
+    <div class="row justify-content-between">
+        <!--Category list-->
+        <div class="col-5">
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between" th:each="category : ${categories}">
+                    <a th:href="@{/categories(id=${category.id})}" th:text="${category.name}"></a>
+
+                    <form th:action="@{|/categories/delete/${category.id}|}" method="POST">
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-5">
+            <!--Create form-->
+            <form method="POST" th:action="@{categories/create}" th:if="${categoryToCreate}"
+                  th:object="${categoryToCreate}">
+                <div class="mb-3">
+                    <label for="name" class="form-label d-block">Nome</label>
+                    <input type="text" class="form-control w-50 d-inline-block" id="name"
+                           aria-describedby="name" th:field="*{name}">
+                    <button type="submit" class="btn btn-danger mb-1">Submit</button>
+                </div>
+            </form>
+
+            <!--Update Form-->
+            <form method="POST" th:action="@{|/categories/edit/${categoryToUpdate.id}|}" th:if="${categoryToUpdate}"
+                  th:object="${categoryToUpdate}">
+                <div class="mb-3">
+                    <label for="name" class="form-label d-block">Nome</label>
+                    <input type="text" class="form-control w-50 d-inline-block" id="name"
+                           aria-describedby="name" th:field="*{name}">
+                    <button type="submit" class="btn btn-danger mb-1">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -26,6 +26,10 @@
                         <a class="nav-link" aria-current="page" th:href="@{'/photos/create'}"
                            th:classAppend="${link == 'addPhoto'} ? 'my-active' : 'not-active'">Aggiungi una foto</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" th:href="@{'/categories'}"
+                           th:classAppend="${link == 'categories'} ? 'my-active' : 'not-active'">Categorie</a>
+                    </li>
                 </ul>
             </div>
             <!--Logout-->

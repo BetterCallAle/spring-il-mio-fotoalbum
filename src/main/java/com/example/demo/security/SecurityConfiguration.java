@@ -34,6 +34,7 @@ public class SecurityConfiguration {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests()
                 .requestMatchers("/photos", "/photos/**", "/photos/create", "/photos/edit/**", "photos/delete/**").hasAuthority("ADMIN")
+                .requestMatchers("/categories", "/categories/create", "/categories/edit/**", "/categories/delete/**").hasAuthority("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/photos/**").hasAuthority("ADMIN")
                 .requestMatchers("/**").permitAll()
                 .and().formLogin()

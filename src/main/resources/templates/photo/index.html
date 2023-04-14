@@ -11,14 +11,15 @@
 <body>
 <header th:insert="~{fragments/header :: header('photos')}"></header>
 
-<!--ALERT-->
-<th:block th:if="${success}">
-    <div th:replace="~{fragments/alert :: alert(${success})}"></div>
-</th:block>
-<!--/ALERT-->
 
 <div class="container py-4">
-    <h1 class="text-center mb-3">
+    <!--ALERT-->
+    <th:block th:if="${success}">
+        <div th:replace="~{fragments/alert :: alert(${success})}"></div>
+    </th:block>
+    <!--/ALERT-->
+    
+    <h1 class="text-center text-danger mb-3">
         Tutte le foto
         <a th:href="@{/photos/create}" class="btn btn-danger">
             <i class="fa-solid fa-plus"></i>
