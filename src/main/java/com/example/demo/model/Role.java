@@ -1,6 +1,11 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "roles")
