@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <div th:replace="~{fragments/resources :: resources('Messaggi')}"></div>
+</head>
+<body>
+<header th:insert="~{fragments/header :: header('messages')}"></header>
+<div class="container py-4">
+    <h1 class="text-center text-danger mb-3">I tuoi messaggi</h1>
+
+    <table class="table mx-auto mt-3" th:if="${messages.size} > 0">
+        <thead>
+        <tr>
+            <th scope="col">Email</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Cognome</th>
+            <th scope="col">Messaggio</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="message : ${messages}" th:object="${message}">
+            <th scope="row" th:text="*{email}"></th>
+            <td th:text="*{surname}"></td>
+            <td th:text="*{name}"></td>
+            <td th:text="*{message}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h4 class="text-center" th:if="${messages.size} < 0">Non ci sono messaggi per il momento</h4>
+</div>
+</body>
+</html>

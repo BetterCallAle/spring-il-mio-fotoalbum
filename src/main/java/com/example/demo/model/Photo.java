@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -26,7 +27,6 @@ public class Photo {
     @NotBlank(message = "URL obbligatorio")
     @Column(columnDefinition = "TEXT", nullable = false)
     private String imgUrl;
-
     @ManyToMany
     @JoinTable(
             name = "category_photo",
