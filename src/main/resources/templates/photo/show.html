@@ -20,7 +20,8 @@
             <li class="d-inline-block me-2" th:each="category : *{categories}" th:text="'#' + ${category.name}"></li>
         </ul>
         <h1 class="text-danger" th:text="*{title}"></h1>
-        <img th:src="@{*{imgUrl}}">
+        <img th:src="@{*{imgUrl}}" th:if="!*{imageFile}">
+        <img th:src="@{|/file/*{imageFile.id}|}" th:if="*{imageFile}">
         <p th:text="*{description}"></p>
         <p>Visibile:
             <i class="fa-solid fa-check btn btn-success" th:if="*{visible} == true"></i>

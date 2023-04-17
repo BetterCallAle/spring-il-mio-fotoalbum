@@ -67,7 +67,6 @@ public class PhotoController {
     @GetMapping("/create")
     public String create(Model model) {
         List<Category> categories = categoryService.getAllCategories();
-        ImageForm imageForm = new ImageForm();
         model.addAttribute("imageForm", new ImageForm());
         model.addAttribute("categories", categories);
         return "photo/create";
@@ -100,7 +99,9 @@ public class PhotoController {
     public String edit(@PathVariable Integer id, Model model) {
         try {
             Photo photo = photoService.findPhoto(id);
-            model.addAttribute("photo", photo);
+            ImageForm imageForm = new ImageForm();
+            imageForm.setPhoto(photo);
+            model.addAttribute("imageForm", imageForm);
             List<Category> categories = categoryService.getAllCategories();
             model.addAttribute("categories", categories);
             return "photo/edit";
@@ -111,7 +112,7 @@ public class PhotoController {
 
     //UPDATE
     @PostMapping("/edit/{id}")
-    public String update(@PathVariable Integer id, @Valid @ModelAttribute Photo photo, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
+    public String update(@PathVariable Integer id, @Valid @ModelAttribute ImageForm imageForm, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             List<Category> categories = categoryService.getAllCategories();
             model.addAttribute("categories", categories);
@@ -119,10 +120,11 @@ public class PhotoController {
         }
 
         try {
-            photoService.updatePhoto(photo, id);
-            redirectAttributes.addFlashAttribute("success", "La foto " + photo.getTitle() + " è stata aggiornata con successo");
+            Photo updatedPhoto = photoService.updatePhoto(imageForm.getPhoto(), id);
+            imageFileService.updateImageFile(updatedPhoto, imageForm.getMultipartFile(), updatedPhoto.getImageFile().getId());
+            redirectAttributes.addFlashAttribute("success", "La foto " + imageForm.getPhoto().getTitle() + " è stata aggiornata con successo");
             return "redirect:/photos";
-        } catch (PhotoNotFoundException e) {
+        } catch (PhotoNotFoundException | ResponseStatusException | IOException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }

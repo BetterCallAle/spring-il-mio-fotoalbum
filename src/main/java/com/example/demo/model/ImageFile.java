@@ -1,6 +1,8 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "image_files")
@@ -14,6 +16,7 @@ public class ImageFile {
     private byte[] content;
 
     @OneToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Photo photo;
 
     //GETTERS
