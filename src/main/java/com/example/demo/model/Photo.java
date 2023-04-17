@@ -35,6 +35,9 @@ public class Photo {
     )
     private Set<Category> categories;
 
+    @OneToOne(mappedBy = "photo")
+    private ImageFile imageFile;
+
     //GETTERS
     public Integer getId() {
         return id;
@@ -60,6 +63,10 @@ public class Photo {
         return categories;
     }
 
+    public ImageFile getImageFile() {
+        return imageFile;
+    }
+
     //SETTERS
     public void setId(Integer id) {
         this.id = id;
@@ -83,6 +90,10 @@ public class Photo {
 
     public void setCategories(Set<Category> categories) {
         this.categories = categories;
+    }
+
+    public void setImageFile(ImageFile imageFile) {
+        this.imageFile = imageFile;
     }
 
     //EQUALS AND HASHCODE

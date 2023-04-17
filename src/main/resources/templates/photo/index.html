@@ -47,7 +47,8 @@
             <th scope="row" th:text="*{title}"></th>
             <td th:text="*{visible} == true ? 'Si' : 'No'"></td>
             <td>
-                <img th:src="@{*{imgUrl}}" class="table-img">
+                <img th:src="@{*{imgUrl}}" class="table-img" th:if="!*{imageFile}">
+                <img th:src="@{|/file/*{imageFile.id}|}" class="table-img" th:if="*{imageFile}">
             </td>
             <td>
                 <a th:href="@{|/photos/*{id}|}" class="btn btn-danger"><i class="fa-solid fa-eye"></i></a>
