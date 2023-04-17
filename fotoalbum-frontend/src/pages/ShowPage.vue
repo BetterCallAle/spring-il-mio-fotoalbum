@@ -11,7 +11,8 @@
                 </ul>
             </div>
             <h1 class="text-danger">{{ photo.title }}</h1>
-            <img :src="photo.imgUrl" :alt="photo.title">
+            <img v-if="!photo.imageFile" :src="photo.imgUrl" :alt="photo.title">
+            <img v-else :src="photo.imageFile" :alt="photo.title">
         </div>
         <p>{{photo.description}}</p>
     </div>
@@ -38,7 +39,10 @@ export default {
             const id = this.$route.params.id;
             axios.get(this.apiUrl + '/' + id).then(resp=>{
                 this.photo = resp.data;
-                console.log(this.photo);
+                if(this.photo.imageFile){
+                    const id = this.photo.imageFile.id;
+                    this.photo.imageFile = `http://localhost:8080/file/${id}`
+                }
             })
         }
     }

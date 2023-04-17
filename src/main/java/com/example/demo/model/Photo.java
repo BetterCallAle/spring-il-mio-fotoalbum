@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -38,6 +39,7 @@ public class Photo {
     private Set<Category> categories;
 
     @OneToOne(mappedBy = "photo")
+    @JsonIncludeProperties(value = {"id"})
     private ImageFile imageFile;
 
     //GETTERS

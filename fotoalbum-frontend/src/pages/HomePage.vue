@@ -9,10 +9,12 @@ export default{
     data(){
         return{
             apiUrl : 'http://localhost:8080/api/photos',
+            imgUrl: 'http://localhost:8080/api/photos',
             photos: [],
             index: 0,
             search: false,
-            searchInput: ""
+            searchInput: "",
+            load: false,
         }
     },
     created(){
@@ -23,6 +25,14 @@ export default{
         getAllPhotos(){
             axios.get(this.apiUrl).then(resp=>{
                 this.photos = resp.data;
+                for (let index = 0; index < this.photos.length; index++) {
+                    const element = this.photos[index];
+                    if(element.imageFile){
+                        console.log(element);
+                        const id = element.imageFile.id;
+                        element.imageFile = `http://localhost:8080/file/${id}`
+                    }
+                }
             })
         },
 
@@ -63,7 +73,8 @@ export default{
     <AppHeader />
 
     <section v-if="!search" id="carousel" class="carousel">
-        <img :src="photos[index].imgUrl" :alt="photos[index].title">
+        <img v-if="!photos[index].imageFile" :src="photos[index].imgUrl" :alt="photos[index].title">
+        <img v-else :src="photos[index].imageFile" :alt="photos[index].title">
 
         <div class="image-info">
             <div class="image-categories">

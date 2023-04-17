@@ -3,7 +3,8 @@
         <div class="card" style="width: 18rem;">
             <!-- Img -->
             <div class="card-img">
-                <img :src="photo.imgUrl" class="card-img-top" :alt="photo.title">
+                <img v-if="!photo.imageFile" :src="photo.imgUrl" class="card-img-top" :alt="photo.title">
+                <img v-else :src="photo.imageFile" :alt="photo.title">
             </div>
             <!-- /Img -->
             <div class="card-body">
@@ -45,7 +46,7 @@ export default {
         height: 50%;
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
-        overflow-y: hidden;
+        overflow: hidden;
 
         img{
             height: 100%;
