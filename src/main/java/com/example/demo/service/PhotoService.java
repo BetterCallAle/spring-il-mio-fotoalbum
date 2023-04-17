@@ -19,6 +19,16 @@ public class PhotoService {
         return photoRepo.findAll();
     }
 
+    //Find all visible Photos
+    public List<Photo> getAllVisiblePhotos(){
+        return photoRepo.findByVisible(true);
+    }
+
+    //Find all visible Photos searching by name
+    public List<Photo> getAllVisiblePhotosSearchingByName(String name){
+        return photoRepo.findByTitleContainingIgnoreCaseAndVisible(name, true);
+    }
+
     //Find a photo searching by ID
     public Photo findPhoto(Integer id) throws PhotoNotFoundException {
         Optional<Photo> photo = photoRepo.findById(id);

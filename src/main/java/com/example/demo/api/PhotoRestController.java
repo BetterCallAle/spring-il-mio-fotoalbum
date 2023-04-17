@@ -25,9 +25,9 @@ public class PhotoRestController {
     public List<Photo> index(@RequestParam(name = "title") Optional<String> title) {
         List<Photo> photos;
         if (title.isPresent()) {
-            photos = photoService.findPhotoByName(title.get());
+            photos = photoService.getAllVisiblePhotosSearchingByName(title.get());
         } else {
-            photos = photoService.getAllPhotos();
+            photos = photoService.getAllVisiblePhotos();
         }
 
         return photos;
